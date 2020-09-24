@@ -3,10 +3,17 @@ pub struct Heap<'a> {
 }
 
 impl Heap<'_> {
-    pub fn new(input: &mut [i32]) -> Self {
+    pub fn new(input: & mut [i32]) -> Self {
         Heap {
             heap: input
         }
+    }
+
+    pub fn print_heap(&self) {
+        for x in self.heap {
+            print!("{}, ", x);
+        }
+        println!();
     }
 
     pub fn build_heap(&mut self) {
@@ -15,7 +22,6 @@ impl Heap<'_> {
         for i in (0..n/2 - 1).rev() {
             self.sift_down_iterative(i, n);
         }
-
         println!("Done building heap!");
     }
 
@@ -26,7 +32,7 @@ impl Heap<'_> {
         let mut c1;
         let mut c2;
 
-        while parent < n/2 {
+        while parent < heap_size/2 {
             parent = root_index;
             c1 = parent*2 +1;
             c2 = parent*2 + 2;
@@ -44,7 +50,8 @@ impl Heap<'_> {
                 break;
             }
 
-            self.swap()
+            self.swap(largest_index, parent);
+            parent = largest_index;
         }
     }
 
