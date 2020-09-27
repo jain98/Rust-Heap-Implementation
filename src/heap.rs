@@ -9,6 +9,10 @@ impl<'a> Heap<'a> {
         }
     }
 
+    pub fn get_backing_array(&self) -> &[i32] {
+        return self.heap;
+    }
+
     pub fn print_heap(&self) {
         for x in self.heap.iter() {
             print!("{}, ", x);
@@ -63,7 +67,7 @@ impl<'a> Heap<'a> {
     }
 
     pub fn sift_up(&mut self, index_to_sift_up: usize) {
-        let mut item_to_sift_up = self.heap[index_to_sift_up];
+        let item_to_sift_up = self.heap[index_to_sift_up];
         let mut c = index_to_sift_up;
         let mut p = (c-1) / 2;
 
@@ -95,7 +99,7 @@ impl<'a> Heap<'a> {
                 largest_index = c1;
             }
             if c2 < heap_size && largest < self.heap[c2] {
-                largest = self.heap[c2];
+               // largest = self.heap[c2];
                 largest_index = c2;
             }
 
@@ -109,9 +113,9 @@ impl<'a> Heap<'a> {
     }
 
     pub fn sift_down_recursive(&mut self, root_index: usize, heap_size: usize) {
-        let mut p = root_index;
-        let mut c1 = p * 2 + 1;
-        let mut c2 = p * 2 + 2;
+        let p = root_index;
+        let c1 = p * 2 + 1;
+        let c2 = p * 2 + 2;
 
         let mut largest = self.heap[p];
         let mut largest_index = p;
@@ -121,7 +125,7 @@ impl<'a> Heap<'a> {
             largest_index = c1;
         }
         if c2 < heap_size && largest < self.heap[c2] {
-            largest = self.heap[c2];
+            //largest = self.heap[c2];
             largest_index = c2;
         }
 

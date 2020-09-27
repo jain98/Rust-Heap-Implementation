@@ -7,7 +7,7 @@ fn main() {
     let mut heap_impl = heap::Heap::new(&mut input);
 
     heap_impl.build_heap_recursive();
-    
+
     println!("Applying heapsort on input...");
-    heap_impl.heap_sort();
+    heap_impl.heap_sort_recursive();
 }
